@@ -1,583 +1,702 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#08080c">
-<title>LORD SHADOW — Enter the Unknown</title>
+<meta name="theme-color" content="#080910">
+<title>LORD SHADOW — The Digital Realm</title>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
-
 :root {
-  --bg: #08080c;
-  --panel: #111119;
-  --text: #f5f2ff;
-  --muted: #9995ac;
-  --purple: #a78bfa;
-  --pink: #fb7185;
-  --border: #ffffff17;
+  --bg: #080910;
+  --panel: #10121e;
+  --panel2: #151827;
+  --text: #f1f1f8;
+  --muted: #9295aa;
+  --cyan: #55f6e5;
+  --purple: #a879ff;
+  --pink: #ff5db1;
+  --border: rgba(255,255,255,.1);
 }
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+* { box-sizing: border-box; }
 
-html {
-  scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
 
 body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: 'Space Grotesk', sans-serif;
-  overflow-x: hidden;
-}
-
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
+  margin: 0;
   background:
-    radial-gradient(ellipse at 15% 15%, #6d28d920, transparent 40%),
-    radial-gradient(ellipse at 85% 70%, #be123c12, transparent 40%);
+    radial-gradient(ellipse at 15% 0%, #19203b 0%, transparent 45%),
+    radial-gradient(ellipse at 90% 30%, #211432 0%, transparent 40%),
+    var(--bg);
+  color: var(--text);
+  font-family: Inter, system-ui, Arial, sans-serif;
+  min-height: 100vh;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
+button, input { font: inherit; }
 
-button, input {
-  font: inherit;
-}
+button { cursor: pointer; }
 
-nav {
-  height: 80px;
-  max-width: 1200px;
-  margin: auto;
-  padding: 0 30px;
+header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+  padding: 18px 7%;
+  background: rgba(8,9,16,.85);
+  backdrop-filter: blur(18px);
   border-bottom: 1px solid var(--border);
 }
 
 .logo {
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 4px;
+  font-size: 18px;
+  font-weight: 900;
+  letter-spacing: 3px;
 }
 
-.logo span {
-  color: var(--purple);
+.logo span { color: var(--cyan); }
+
+nav {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
 }
 
-.nav-status {
+nav button {
+  background: transparent;
+  border: 1px solid transparent;
   color: var(--muted);
-  font-size: 12px;
-  letter-spacing: 1px;
+  padding: 9px 13px;
+  border-radius: 8px;
 }
 
-.green-dot {
-  display: inline-block;
-  width: 7px;
-  height: 7px;
-  margin-right: 8px;
-  border-radius: 50%;
-  background: #86efac;
-  box-shadow: 0 0 12px #86efac;
+nav button:hover,
+nav button.active {
+  color: var(--cyan);
+  border-color: rgba(85,246,229,.3);
+  background: rgba(85,246,229,.06);
 }
 
-.hero {
-  max-width: 1200px;
-  min-height: 85vh;
+main {
+  width: min(1120px, 88%);
   margin: auto;
-  padding: 80px 30px;
-  display: grid;
-  grid-template-columns: 1.1fr .9fr;
-  align-items: center;
-  gap: 40px;
+  padding: 65px 0 100px;
 }
+
+section { display: none; }
+section.active { display: block; }
 
 .eyebrow {
-  color: var(--purple);
-  text-transform: uppercase;
+  color: var(--cyan);
   letter-spacing: 4px;
+  text-transform: uppercase;
   font-size: 11px;
-  font-weight: 700;
+  font-weight: 800;
 }
 
 h1 {
-  margin: 30px 0;
-  font-size: clamp(65px, 10vw, 130px);
-  line-height: .83;
-  letter-spacing: -9px;
-  font-weight: 700;
+  font-size: clamp(42px, 8vw, 82px);
+  line-height: .98;
+  margin: 20px 0;
+  letter-spacing: -4px;
 }
 
-.outline {
+h1 span {
+  background: linear-gradient(90deg, var(--cyan), var(--purple), var(--pink));
+  -webkit-background-clip: text;
   color: transparent;
-  -webkit-text-stroke: 1px #e8ddff;
 }
 
-.intro {
-  max-width: 440px;
+h2 { font-size: 32px; }
+
+p {
   color: var(--muted);
-  line-height: 1.9;
-  font-size: 15px;
+  line-height: 1.7;
 }
 
-.buttons {
+.hero {
+  min-height: 430px;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.hero p { max-width: 550px; }
+
+.actions {
+  display: flex;
   gap: 12px;
-  margin-top: 30px;
+  flex-wrap: wrap;
+  margin-top: 25px;
 }
 
 .btn {
-  padding: 13px 20px;
+  padding: 13px 19px;
+  border-radius: 9px;
   border: 1px solid var(--border);
-  border-radius: 40px;
-  background: transparent;
   color: var(--text);
-  cursor: pointer;
-  font-size: 12px;
+  background: var(--panel2);
   font-weight: 700;
-  transition: .25s;
-}
-
-.btn:hover {
-  transform: translateY(-3px);
-  border-color: var(--purple);
 }
 
 .btn.primary {
-  background: var(--text);
-  color: #111119;
+  background: var(--cyan);
+  color: #06110f;
+  border-color: var(--cyan);
 }
 
-.btn.primary:hover {
-  background: var(--purple);
-}
+.btn:hover { transform: translateY(-2px); }
 
-.cosmos {
-  min-height: 430px;
+.grid {
   display: grid;
-  place-items: center;
-  position: relative;
-}
-
-.orb {
-  width: min(30vw, 340px);
-  aspect-ratio: 1;
-  border-radius: 50%;
-  position: relative;
-  background:
-    radial-gradient(circle at 30% 25%, #fff 0%, #ddd6fe 3%, #a78bfa 10%, #6d28d9 24%, #26113e 50%, #08080c 72%);
-  box-shadow:
-    inset -25px -25px 60px #000c,
-    0 0 70px #8b5cf633,
-    0 0 150px #7c3aed18;
-  animation: float 7s ease-in-out infinite;
-}
-
-.orb::before,
-.orb::after {
-  content: "";
-  position: absolute;
-  inset: -15%;
-  border: 1px solid #c4b5fd44;
-  border-radius: 50%;
-  transform: scaleY(.32) rotate(-30deg);
-}
-
-.orb::after {
-  inset: -25%;
-  transform: scaleY(.25) rotate(35deg);
-  border-color: #fb718544;
-}
-
-.tag {
-  position: absolute;
-  padding: 14px 16px;
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  background: #111119df;
-  backdrop-filter: blur(15px);
-  color: var(--muted);
-  font-size: 11px;
-}
-
-.tag strong {
-  display: block;
-  color: var(--text);
-  margin-bottom: 5px;
-}
-
-.tag.left {
-  left: 0;
-  top: 20%;
-}
-
-.tag.right {
-  right: 0;
-  bottom: 18%;
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0) rotate(-5deg); }
-  50% { transform: translateY(-18px) rotate(5deg); }
-}
-
-section.content {
-  max-width: 1200px;
-  margin: auto;
-  padding: 90px 30px;
-}
-
-.section-label {
-  color: var(--muted);
-  font-size: 11px;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-}
-
-h2 {
-  margin-top: 14px;
-  font-size: clamp(35px, 5vw, 60px);
-  letter-spacing: -3px;
-}
-
-.cards {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
   gap: 16px;
-  margin-top: 35px;
+  margin-top: 25px;
 }
 
 .card {
-  padding: 28px;
-  min-height: 260px;
-  background: linear-gradient(145deg, #ffffff08, transparent), var(--panel);
+  padding: 24px;
+  background: linear-gradient(145deg, rgba(25,29,48,.95), rgba(13,15,25,.95));
   border: 1px solid var(--border);
-  border-radius: 16px;
-  transition: .3s;
+  border-radius: 15px;
+  transition: .2s;
 }
 
 .card:hover {
-  transform: translateY(-7px);
-  border-color: #a78bfa77;
+  border-color: rgba(85,246,229,.45);
+  transform: translateY(-3px);
 }
 
-.card-number {
-  color: var(--purple);
-  font-size: 11px;
-  letter-spacing: 2px;
+.card .symbol {
+  font-size: 28px;
+  margin-bottom: 15px;
 }
 
-.card-icon {
-  display: block;
-  font-size: 30px;
-  margin: 30px 0 20px;
+.card h3 { margin: 0 0 8px; }
+
+.card p { font-size: 14px; }
+
+.panel {
+  margin-top: 25px;
+  padding: 25px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: rgba(16,18,30,.85);
 }
 
-.card h3 {
-  font-size: 21px;
-  margin-bottom: 10px;
+input {
+  width: 100%;
+  padding: 13px;
+  margin: 8px 0 15px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #080a12;
+  color: white;
+  outline: none;
 }
 
-.card p {
-  color: var(--muted);
+input:focus { border-color: var(--cyan); }
+
+.result {
+  margin-top: 15px;
+  padding: 14px;
+  background: rgba(85,246,229,.07);
+  border: 1px solid rgba(85,246,229,.2);
+  border-radius: 8px;
+  color: var(--cyan);
+  overflow-wrap: anywhere;
+}
+
+.terminal {
+  background: #05070b;
+  border: 1px solid rgba(85,246,229,.25);
+  border-radius: 12px;
+  padding: 20px;
+  font-family: Consolas, monospace;
+}
+
+.terminal-output {
+  height: 220px;
+  overflow-y: auto;
+  color: var(--cyan);
   font-size: 13px;
-  line-height: 1.8;
+  line-height: 1.7;
+  white-space: pre-wrap;
 }
 
-.manifesto {
-  padding: 100px 25px;
-  text-align: center;
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  background: linear-gradient(90deg, #a78bfa09, transparent);
-}
-
-.manifesto p {
-  max-width: 850px;
-  margin: 25px auto;
-  font-size: clamp(30px, 5vw, 58px);
-  line-height: 1.2;
-  letter-spacing: -3px;
-}
-
-.manifesto em {
-  color: var(--purple);
-  font-style: normal;
-}
-
-.secret {
-  max-width: 1200px;
-  margin: 80px auto;
-  padding: 0 30px;
-}
-
-.secret-box {
-  padding: 35px;
-  border: 1px solid #a78bfa44;
-  border-radius: 18px;
-  background: radial-gradient(ellipse at right top, #a78bfa16, transparent 60%), var(--panel);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 25px;
-}
-
-.secret-box h3 {
-  font-size: 23px;
-  margin: 12px 0;
-}
-
-.secret-box p {
-  color: var(--muted);
-  font-size: 13px;
-  line-height: 1.8;
-}
-
-.secret-form {
+.terminal-input {
   display: flex;
   gap: 10px;
+  align-items: center;
 }
 
-.secret-form input {
-  width: 190px;
-  padding: 13px 16px;
-  border: 1px solid var(--border);
-  border-radius: 30px;
-  outline: none;
-  background: var(--bg);
-  color: white;
-}
-
-.secret-form input:focus {
-  border-color: var(--purple);
-}
-
-#message {
-  min-height: 18px;
-  margin-top: 12px;
-  color: var(--purple);
-  font-size: 12px;
+.terminal-input input {
+  margin: 0;
+  border: 0;
+  background: transparent;
+  font-family: Consolas, monospace;
 }
 
 footer {
-  max-width: 1200px;
-  margin: auto;
-  padding: 25px 30px 35px;
   border-top: 1px solid var(--border);
-  display: flex;
-  justify-content: space-between;
-  gap: 20px;
+  padding: 30px 7%;
   color: var(--muted);
-  font-size: 10px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
+  text-align: center;
+  font-size: 12px;
 }
 
-.fade {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity .8s, transform .8s;
-}
-
-.fade.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-@media (max-width: 760px) {
-  nav { height: 68px; padding: 0 20px; }
-  .hero {
-    grid-template-columns: 1fr;
-    padding: 70px 22px 30px;
-    gap: 10px;
+@media(max-width:700px) {
+  header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 14px;
   }
-  h1 { letter-spacing: -5px; }
-  .cosmos { min-height: 330px; }
-  .orb { width: min(60vw, 290px); }
-  .tag.left { left: 0; }
-  .tag.right { right: 0; }
-  section.content { padding: 65px 22px; }
-  .cards { grid-template-columns: 1fr; }
-  .card { min-height: 220px; }
-  .secret { padding: 0 22px; margin: 60px auto; }
-  .secret-box { display: block; padding: 25px; }
-  .secret-form { margin-top: 20px; }
-  .secret-form input { width: 100%; min-width: 0; }
-  footer { padding: 25px 22px; flex-direction: column; }
-}
 
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation: none !important;
-    scroll-behavior: auto !important;
-    transition: none !important;
-  }
-  .fade { opacity: 1; transform: none; }
+  nav { width: 100%; }
+  nav button { padding: 8px; font-size: 12px; }
+  main { padding-top: 40px; }
+  h1 { letter-spacing: -2px; }
 }
 </style>
 </head>
 
 <body>
 
-<nav>
-  <a href="#" class="logo">LORD<span>✳</span>SHADOW</a>
-  <div class="nav-status"><span class="green-dot"></span>REALM ONLINE</div>
-</nav>
+<header>
+  <div class="logo">LORD <span>SHADOW</span></div>
+  <nav>
+    <button class="active" data-page="home">Nexus</button>
+    <button data-page="lab">The Lab</button>
+    <button data-page="arena">Arena</button>
+    <button data-page="vault">Vault</button>
+    <button data-page="archive">Archive</button>
+    <button data-page="terminal">Terminal</button>
+  </nav>
+</header>
 
 <main>
-  <header class="hero">
-    <div>
-      <div class="eyebrow">A little corner of the internet</div>
-      <h1>LORD<br><span class="outline">SHADOW</span></h1>
-      <p class="intro">
-        Not a portfolio. Not a business. Just a digital realm for strange
-        ideas, side quests, experiments, and things that don't need explaining.
-      </p>
 
-      <div class="buttons">
-        <a class="btn primary" href="#archive">Enter the realm ↘</a>
-        <button class="btn" id="surprise">Surprise me ✳</button>
-      </div>
-    </div>
-
-    <div class="cosmos">
-      <div class="orb"></div>
-      <div class="tag left">
-        <strong>01 / Curiosity</strong>
-        Question everything.
-      </div>
-      <div class="tag right">
-        <strong>∞ / Side quests</strong>
-        Main character energy.
-      </div>
-    </div>
-  </header>
-
-  <section class="content" id="archive">
-    <div class="fade">
-      <div class="section-label">The contents / 001—003</div>
-      <h2>Choose your rabbit hole.</h2>
-    </div>
-
-    <div class="cards">
-      <article class="card fade">
-        <div class="card-number">01 — THE LAB</div>
-        <span class="card-icon">✳</span>
-        <h3>Experiments</h3>
-        <p>Half-finished ideas, odd prototypes, and tiny projects that escaped containment.</p>
-      </article>
-
-      <article class="card fade">
-        <div class="card-number">02 — THE VAULT</div>
-        <span class="card-icon">◈</span>
-        <h3>Collected curiosities</h3>
-        <p>Interesting finds, digital artefacts, rabbit holes, and things worth keeping around.</p>
-      </article>
-
-      <article class="card fade">
-        <div class="card-number">03 — THE VOID</div>
-        <span class="card-icon">☾</span>
-        <h3>Unclassified</h3>
-        <p>No category. No roadmap. Some things are better when they stay mysterious.</p>
-      </article>
-    </div>
-  </section>
-
-  <section class="manifesto fade">
-    <div class="section-label">A completely unnecessary philosophy</div>
+<section id="home" class="active">
+  <div class="hero">
+    <div class="eyebrow">Welcome to the digital realm</div>
+    <h1>ENTER THE<br><span>UNKNOWN.</span></h1>
     <p>
-      The internet used to feel like a place to <em>explore.</em><br>
-      Let's make a little more of that.
+      A personal digital playground. Experiments, games, strange
+      discoveries and tools — all operating under one identity.
     </p>
-    <div class="section-label">Stay curious · Stay strange</div>
-  </section>
-
-  <section class="secret">
-    <div class="secret-box fade">
-      <div>
-        <div class="section-label">Restricted access / maybe</div>
-        <h3>Found the hidden terminal?</h3>
-        <p>Enter a secret phrase. There may or may not be something here.</p>
-        <div id="message" aria-live="polite"></div>
-      </div>
-
-      <form class="secret-form" id="secretForm">
-        <input id="secretInput" autocomplete="off" placeholder="Enter a phrase..." aria-label="Secret phrase">
-        <button class="btn primary" type="submit">Unlock ↗</button>
-      </form>
+    <div class="actions">
+      <button class="btn primary" onclick="showPage('lab')">Explore the Lab</button>
+      <button class="btn" onclick="showPage('terminal')">Open Terminal</button>
     </div>
-  </section>
+  </div>
+
+  <div class="eyebrow">Inside the realm</div>
+  <div class="grid">
+    <div class="card" onclick="showPage('lab')">
+      <div class="symbol">⌘</div>
+      <h3>The Lab</h3>
+      <p>Calculators, experiments and interactive tools.</p>
+    </div>
+    <div class="card" onclick="showPage('arena')">
+      <div class="symbol">⚔</div>
+      <h3>The Arena</h3>
+      <p>Small games and challenges to test yourself.</p>
+    </div>
+    <div class="card" onclick="showPage('vault')">
+      <div class="symbol">⬡</div>
+      <h3>The Vault</h3>
+      <p>A locked room containing a little mystery.</p>
+    </div>
+    <div class="card" onclick="showPage('archive')">
+      <div class="symbol">◈</div>
+      <h3>The Archive</h3>
+      <p>Facts, notes and interesting discoveries.</p>
+    </div>
+  </div>
+</section>
+
+<section id="lab">
+  <div class="eyebrow">Experiments and utilities</div>
+  <h2>The Lab</h2>
+  <p>A collection of small tools running entirely in your browser.</p>
+
+  <div class="grid">
+    <div class="card">
+      <div class="symbol">🎲</div>
+      <h3>Random Number</h3>
+      <p>Generate a random integer between two values.</p>
+      <input id="min" type="number" value="1" placeholder="Minimum">
+      <input id="max" type="number" value="100" placeholder="Maximum">
+      <button class="btn primary" onclick="randomNumber()">Generate</button>
+      <div id="randomResult" class="result">Awaiting input...</div>
+    </div>
+
+    <div class="card">
+      <div class="symbol">📈</div>
+      <h3>Compound Interest</h3>
+      <p>Calculate how an investment grows over time.</p>
+      <input id="principal" type="number" value="1000" placeholder="Initial amount">
+      <input id="rate" type="number" value="5" placeholder="Annual interest (%)">
+      <input id="years" type="number" value="10" placeholder="Years">
+      <button class="btn primary" onclick="compoundInterest()">Calculate</button>
+      <div id="interestResult" class="result">Awaiting input...</div>
+    </div>
+
+    <div class="card">
+      <div class="symbol">🧮</div>
+      <h3>Probability Simulator</h3>
+      <p>Simulate repeated coin flips.</p>
+      <input id="flips" type="number" value="1000" min="1" max="1000000">
+      <button class="btn primary" onclick="simulateFlips()">Run simulation</button>
+      <div id="flipResult" class="result">Awaiting simulation...</div>
+    </div>
+
+    <div class="card">
+      <div class="symbol">✦</div>
+      <h3>Lucky Draw</h3>
+      <p>Pick a random item from your list.</p>
+      <input id="drawItems" placeholder="Pizza, Sushi, Pasta">
+      <button class="btn primary" onclick="luckyDraw()">Pick for me</button>
+      <div id="drawResult" class="result">Awaiting input...</div>
+    </div>
+  </div>
+</section>
+
+<section id="arena">
+  <div class="eyebrow">Games and challenges</div>
+  <h2>The Arena</h2>
+  <p>Take a break. Challenge yourself.</p>
+
+  <div class="grid">
+    <div class="card">
+      <div class="symbol">🎯</div>
+      <h3>Number Guessing</h3>
+      <p>I'm thinking of a number between 1 and 100.</p>
+      <input id="guess" type="number" min="1" max="100" placeholder="Your guess">
+      <button class="btn primary" onclick="makeGuess()">Guess</button>
+      <div id="guessResult" class="result">Make your first guess.</div>
+      <button class="btn" onclick="resetGuess()">New game</button>
+    </div>
+
+    <div class="card">
+      <div class="symbol">⚡</div>
+      <h3>Reaction Test</h3>
+      <p>Wait for the signal, then click as quickly as possible.</p>
+      <button class="btn primary" id="reactionButton" onclick="reactionClick()">Start</button>
+      <div id="reactionResult" class="result">Ready?</div>
+    </div>
+
+    <div class="card">
+      <div class="symbol">🧠</div>
+      <h3>Memory Test</h3>
+      <p>Remember this sequence, then type it back.</p>
+      <button class="btn primary" onclick="startMemory()">Show sequence</button>
+      <div id="memorySequence" class="result">Sequence hidden.</div>
+      <input id="memoryAnswer" placeholder="Enter the sequence">
+      <button class="btn" onclick="checkMemory()">Check answer</button>
+      <div id="memoryResult"></div>
+    </div>
+  </div>
+</section>
+
+<section id="vault">
+  <div class="eyebrow">Restricted access</div>
+  <h2>The Vault</h2>
+  <p>One door. One password. Can you find your way in?</p>
+
+  <div class="panel">
+    <div class="symbol">🔐</div>
+    <h3>Access Terminal</h3>
+    <p>Hint: the name of this realm's ruler.</p>
+    <input id="vaultPassword" type="password" placeholder="Enter access code">
+    <button class="btn primary" onclick="unlockVault()">Authenticate</button>
+    <div id="vaultResult" class="result">SYSTEM LOCKED</div>
+  </div>
+</section>
+
+<section id="archive">
+  <div class="eyebrow">Knowledge repository</div>
+  <h2>The Archive</h2>
+  <p>A few interesting things worth knowing.</p>
+
+  <div class="grid">
+    <div class="card">
+      <h3>01 — Mathematics</h3>
+      <p>There are infinitely many prime numbers. Euclid proved this over 2,000 years ago.</p>
+    </div>
+    <div class="card">
+      <h3>02 — Computing</h3>
+      <p>The first computer bug was an actual moth found in a computer in 1947.</p>
+    </div>
+    <div class="card">
+      <h3>03 — Space</h3>
+      <p>Light from the Sun takes approximately 8 minutes and 20 seconds to reach Earth.</p>
+    </div>
+    <div class="card">
+      <h3>04 — Probability</h3>
+      <p>A shuffled deck of cards has 52 factorial possible arrangements.</p>
+    </div>
+  </div>
+</section>
+
+<section id="terminal">
+  <div class="eyebrow">System interface</div>
+  <h2>Terminal</h2>
+  <p>Type <code>help</code> to see available commands.</p>
+
+  <div class="terminal">
+    <div class="terminal-output" id="terminalOutput">LORD SHADOW OS [Version 1.0]
+Secure connection established.
+Type 'help' for available commands.</div>
+    <div class="terminal-input">
+      <span style="color:var(--cyan)">root@shadow:~$</span>
+      <input id="terminalInput" autocomplete="off" spellcheck="false" placeholder="Enter command...">
+    </div>
+  </div>
+</section>
+
 </main>
 
 <footer>
-  <span>© <span id="year"></span> LORD SHADOW</span>
-  <span>Made for no particular reason.</span>
-  <a href="#">Back to the top ↑</a>
+  LORD SHADOW — THE DIGITAL REALM<br>
+  <span>Built in the shadows. Powered by curiosity.</span>
 </footer>
 
 <script>
-document.getElementById("year").textContent = new Date().getFullYear();
+function showPage(page) {
+  document.querySelectorAll("section").forEach(s => s.classList.remove("active"));
+  document.querySelectorAll("nav button").forEach(b => b.classList.remove("active"));
 
-const surprises = [
-  "Side quest unlocked: drink some water.",
-  "The moon is a suspiciously good lamp.",
-  "Congratulations. You have excellent taste in clicking.",
-  "The real treasure was this unnecessary website.",
-  "Somewhere, a semicolon feels appreciated.",
-  "You were supposed to be doing something else, weren't you?"
-];
+  document.getElementById(page).classList.add("active");
 
-document.getElementById("surprise").addEventListener("click", function () {
-  const message = surprises[Math.floor(Math.random() * surprises.length)];
-  this.textContent = "✳ " + message;
+  const button = document.querySelector(`[data-page="${page}"]`);
+  if (button) button.classList.add("active");
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+document.querySelectorAll("nav button").forEach(button => {
+  button.addEventListener("click", () => showPage(button.dataset.page));
 });
 
-const secrets = {
-  "shadow": "ACCESS GRANTED. You are, in fact, the shadow.",
-  "open sesame": "The door opens. Behind it: another door. Classic.",
-  "42": "The answer to life, the universe, and this input field.",
-  "moonlight": "A soft glow spills across the terminal. You found it.",
-  "lordshadow": "WELCOME BACK, YOUR DARKNESS. The realm recognises you."
-};
+function randomNumber() {
+  const min = Number(document.getElementById("min").value);
+  const max = Number(document.getElementById("max").value);
 
-document.getElementById("secretForm").addEventListener("submit", function (event) {
-  event.preventDefault();
+  if (!Number.isInteger(min) || !Number.isInteger(max) || min > max) {
+    document.getElementById("randomResult").textContent = "Enter valid minimum and maximum values.";
+    return;
+  }
 
-  const input = document.getElementById("secretInput");
-  const message = document.getElementById("message");
-  const phrase = input.value.trim().toLowerCase();
+  document.getElementById("randomResult").textContent =
+    Math.floor(Math.random() * (max - min + 1)) + min;
+}
 
-  message.textContent = secrets[phrase] ||
-    "ACCESS DENIED. Hint: try a word already written on this page.";
+function compoundInterest() {
+  const p = Number(document.getElementById("principal").value);
+  const r = Number(document.getElementById("rate").value) / 100;
+  const t = Number(document.getElementById("years").value);
 
-  message.style.color = secrets[phrase] ? "#86efac" : "#a78bfa";
-});
+  if (p < 0 || t < 0 || !Number.isFinite(p + r + t)) {
+    document.getElementById("interestResult").textContent = "Please enter valid values.";
+    return;
+  }
 
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add("visible");
-      observer.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.12 });
+  const total = p * Math.pow(1 + r, t);
+  document.getElementById("interestResult").textContent =
+    "Final value: " + total.toLocaleString(undefined, {
+      style: "currency",
+      currency: "GBP"
+    });
+}
 
-document.querySelectorAll(".fade").forEach(element => {
-  observer.observe(element);
+function simulateFlips() {
+  const n = Number(document.getElementById("flips").value);
+
+  if (!Number.isInteger(n) || n < 1 || n > 1000000) {
+    document.getElementById("flipResult").textContent = "Choose between 1 and 1,000,000 flips.";
+    return;
+  }
+
+  let heads = 0;
+  for (let i = 0; i < n; i++) {
+    if (Math.random() < 0.5) heads++;
+  }
+
+  document.getElementById("flipResult").textContent =
+    `Heads: ${heads} (${(heads / n * 100).toFixed(2)}%)\n` +
+    `Tails: ${n - heads} (${((n - heads) / n * 100).toFixed(2)}%)`;
+}
+
+function luckyDraw() {
+  const items = document.getElementById("drawItems").value
+    .split(",").map(x => x.trim()).filter(Boolean);
+
+  document.getElementById("drawResult").textContent = items.length
+    ? items[Math.floor(Math.random() * items.length)]
+    : "Enter some comma-separated options first.";
+}
+
+let secretNumber = Math.floor(Math.random() * 100) + 1;
+
+function makeGuess() {
+  const guess = Number(document.getElementById("guess").value);
+  const result = document.getElementById("guessResult");
+
+  if (!Number.isInteger(guess) || guess < 1 || guess > 100) {
+    result.textContent = "Enter a whole number from 1 to 100.";
+  } else if (guess === secretNumber) {
+    result.textContent = "Correct! You found the number. 🎉";
+  } else {
+    result.textContent = guess < secretNumber ? "Too low. Try again." : "Too high. Try again.";
+  }
+}
+
+function resetGuess() {
+  secretNumber = Math.floor(Math.random() * 100) + 1;
+  document.getElementById("guess").value = "";
+  document.getElementById("guessResult").textContent = "New number generated.";
+}
+
+let reactionStart = 0;
+let reactionTimer = null;
+let reactionState = "idle";
+
+function reactionClick() {
+  const button = document.getElementById("reactionButton");
+  const result = document.getElementById("reactionResult");
+
+  if (reactionState === "idle") {
+    reactionState = "waiting";
+    button.textContent = "Wait...";
+    result.textContent = "Wait for the signal...";
+    reactionTimer = setTimeout(() => {
+      reactionState = "ready";
+      reactionStart = performance.now();
+      button.textContent = "CLICK NOW!";
+      result.textContent = "GO!";
+    }, 1500 + Math.random() * 3000);
+  } else if (reactionState === "waiting") {
+    clearTimeout(reactionTimer);
+    reactionState = "idle";
+    button.textContent = "Try again";
+    result.textContent = "Too early! Wait for the signal.";
+  } else if (reactionState === "ready") {
+    const time = Math.round(performance.now() - reactionStart);
+    reactionState = "idle";
+    button.textContent = "Play again";
+    result.textContent = `Your reaction time: ${time} ms`;
+  }
+}
+
+let memoryValue = "";
+
+function startMemory() {
+  memoryValue = Array.from({length: 5}, () => Math.floor(Math.random() * 10)).join("");
+  document.getElementById("memorySequence").textContent = memoryValue;
+  document.getElementById("memoryAnswer").value = "";
+  document.getElementById("memoryResult").textContent = "";
+
+  setTimeout(() => {
+    document.getElementById("memorySequence").textContent = "Sequence hidden.";
+  }, 2500);
+}
+
+function checkMemory() {
+  const answer = document.getElementById("memoryAnswer").value.trim();
+  document.getElementById("memoryResult").textContent =
+    answer === memoryValue && memoryValue
+      ? "Correct! Excellent memory. 🧠"
+      : "Not quite. Try another sequence.";
+}
+
+function unlockVault() {
+  const password = document.getElementById("vaultPassword").value.trim().toLowerCase();
+  const result = document.getElementById("vaultResult");
+
+  if (password === "shadow" || password === "lord shadow") {
+    result.textContent = "ACCESS GRANTED. Welcome, ruler of the realm.";
+  } else {
+    result.textContent = "ACCESS DENIED. Incorrect password.";
+  }
+}
+
+const terminalOutput = document.getElementById("terminalOutput");
+const terminalInput = document.getElementById("terminalInput");
+
+function terminalWrite(text) {
+  terminalOutput.textContent += "\n" + text;
+  terminalOutput.scrollTop = terminalOutput.scrollHeight;
+}
+
+function runCommand(command) {
+  const parts = command.trim().split(/\s+/);
+  const cmd = (parts[0] || "").toLowerCase();
+
+  switch (cmd) {
+    case "help":
+      terminalWrite(
+        "AVAILABLE COMMANDS:\n" +
+        "help       — Show this help\n" +
+        "about      — About Lord Shadow\n" +
+        "date       — Current date and time\n" +
+        "random     — Generate a random number\n" +
+        "clear      — Clear the terminal\n" +
+        "nexus      — Return to the homepage\n" +
+        "lab        — Open The Lab\n" +
+        "arena      — Open The Arena\n" +
+        "vault      — Open The Vault\n" +
+        "archive    — Open The Archive"
+      );
+      break;
+
+    case "about":
+      terminalWrite("LORD SHADOW OS — A digital realm built for curiosity.");
+      break;
+
+    case "date":
+      terminalWrite(new Date().toString());
+      break;
+
+    case "random":
+      terminalWrite("Generated: " + Math.floor(Math.random() * 1000));
+      break;
+
+    case "clear":
+      terminalOutput.textContent = "Terminal cleared.";
+      break;
+
+    case "nexus":
+      showPage("home");
+      terminalWrite("Returning to Nexus...");
+      break;
+
+    case "lab":
+    case "arena":
+    case "vault":
+    case "archive":
+      showPage(cmd);
+      terminalWrite("Opening " + cmd + "...");
+      break;
+
+    case "":
+      break;
+
+    default:
+      terminalWrite("Command not recognised: " + cmd + ". Type 'help'.");
+  }
+}
+
+terminalInput.addEventListener("keydown", event => {
+  if (event.key === "Enter") {
+    const command = terminalInput.value;
+    terminalWrite("> " + command);
+    terminalInput.value = "";
+    runCommand(command);
+  }
 });
 </script>
 
